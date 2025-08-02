@@ -20,14 +20,23 @@ export default async function handler(req, res) {
   
   try {
     console.log('🤖 Proxy: Received Claude analysis request');
+    console.log('📋 Proxy: Request body:', JSON.stringify(req.body, null, 2));
+    console.log('📋 Proxy: Request headers:', req.headers);
     
     // Extract API key from request
     const apiKey = req.headers['x-api-key'] || req.body.apiKey;
     if (!apiKey) {
+      console.log('❌ Proxy: No API key found in headers or body');
       return res.status(400).json({ error: 'API key required' });
     }
     
-    console.log('🔑 Proxy: API key provided');
+    console.log('🔑 Proxy: API key provided:', apiKey.substring(0, 20) + '...');
+    
+    // Prepare Claude API request - strip out apiKey from body
+    const claudeRequestBody = { ...req.body };
+    delete claudeRequestBody.apiKey; // Remove apiKey from request body
+    
+    console.log('🚀 Proxy: Sending to Claude API:', JSON.stringify(claudeRequestBody, null, 2));
     
     // Make request to Claude API
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -37,7 +46,7 @@ export default async function handler(req, res) {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01'
       },
-      body: JSON.stringify(req.body.claudeRequest || req.body)
+      body: JSON.stringify(claudeRequestBody)
     });
     
     console.log('📡 Proxy: Claude API response status:', response.status);
