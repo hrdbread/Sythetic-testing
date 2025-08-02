@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    // Target ES2018 for Figma compatibility
+    "target": "ES2018",
+    "lib": ["ES2018", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    
+    // Type checking - relaxed for Figma plugins
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    
+    // Module handling
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    // Output settings
+    "outDir": ".",
+    "declaration": false,
+    "sourceMap": false,
+    "removeComments": true,
+    
+    // Advanced options
+    "downlevelIteration": true,
+    "importHelpers": false,
+    
+    // Figma-specific types - simplified approach
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@figma"
+    ],
+    
+    // Emit settings
+    "noEmitOnError": false,
+    "preserveConstEnums": false,
+    "isolatedModules": false
+  },
+  "include": [
+    "*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js",
+    "webpack.config.js"
+  ]
+}

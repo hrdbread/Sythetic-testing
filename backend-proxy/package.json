@@ -1,0 +1,17 @@
+{
+  "name": "figma-claude-proxy",
+  "version": "1.0.0",
+  "description": "Backend proxy for Claude API calls from Figma plugin",
+  "main": "api/claude-analysis.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^34.0.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
